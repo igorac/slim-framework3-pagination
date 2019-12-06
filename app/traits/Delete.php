@@ -4,9 +4,6 @@ namespace App\traits;
 
 trait Delete
 {
-
-    private $sql;
-
     public function delete()
     {
 

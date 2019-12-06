@@ -7,10 +7,7 @@ use Exception;
 
 trait Read
 {
-    
-    private $sql;
     private $binds;
-    private $isPaginate = false;
     private $paginate;
 
     public function select($fields = '*'): self
@@ -66,6 +63,20 @@ trait Read
     public function links()
     {
         return $this->paginate->links();
+    }
+
+    public function busca(string $fields): self
+    {
+        $fields = explode(',', $fields);
+
+        $this->sql .= " WHERE ";
+        foreach ($fields as $field) {
+            $this->sql .= "{$field} LIKE :{$field} OR ";
+            $this->binds[$field] = "%". buscaSanitize() ."%";
+        }
+
+        $this->sql = rtrim($this->sql, 'OR ');
+        return $this;
     }
 
     public function paginate(int $perPage): self

@@ -7,12 +7,17 @@ trait Links
     protected $maxLinks = 4;
     
 
+    private function pageRequest()
+    {
+        return (!buscaSanitize()) ? "?page=" : "?s=" . buscaSanitize() . "&page=";
+    }
+
     private function previous()
     {
         if ($this->page > 1) {
             $previous = ($this->page - 1);
-            $links = '<li class="page-item"><a href="?page=1" class="page-link"> [1] </a></li>';
-            $links .= '<li class="page-item"><a href="?page=' . $previous . '" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+            $links = '<li class="page-item"><a href="' . $this->pageRequest() . '" class="page-link"> [1] </a></li>';
+            $links .= '<li class="page-item"><a href="' . $this->pageRequest()  . $previous . '" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
             
             return $links;
         }
@@ -22,14 +27,14 @@ trait Links
     {
         if ($this->page < $this->pages) {
             $next = ($this->page + 1);
-            $links = '<li class="page-item"><a href="?page=' . $next . '" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo</span></a></li>';
-            $links .= '<li class="page-item"><a href="?page=' . $this->pages . '" class="page-link"> [' . $this->pages . ']  </a></li>';
+            $links = '<li class="page-item"><a href="' . $this->pageRequest() . $next . '" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo</span></a></li>';
+            $links .= '<li class="page-item"><a href="' . $this->pageRequest() . $this->pages . '" class="page-link"> [' . $this->pages . ']  </a></li>';
             
             return $links;
         }
     }
 
-    public function links(): string
+    public function links()
     {
 
         if ($this->pages > 0) {
@@ -43,7 +48,7 @@ trait Links
 
                 // Mostra os links numeric
                 if ($i > 0 && $i <= $this->pages) {
-                    $links .= "<li class='page-item " . $class . "'><a href='?page=" . $i . "' class='page-link'>$i</a></li>";
+                    $links .= "<li class='page-item " . $class . "'><a href='" . $this->pageRequest() . $i . "' class='page-link'>$i</a></li>";
                 }
             }
 
@@ -54,4 +59,6 @@ trait Links
             return $links;
         }
     }
+
+
 }

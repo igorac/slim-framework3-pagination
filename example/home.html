@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 
-<h2>Lista de posts</h2>
+<h2>Lista de usuários</h2>
 
 {{ message('message') }}
 
@@ -18,19 +18,21 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Title</th>
+            <th>Name</th>
+            <th>E-mail</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
-        {% for post in posts %}
+        {% for user in users %}
         <tr>
-            <td>{{ post.id }}</td>
-            <td>{{ post.title }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
             <td class="d-flex">
-                <a href="/post/edit/{{ post.id }}"  class="btn btn-sm btn-success mr-2">Editar</a>
-                <form action="/post/delete/{{ post.id }}" method="post">
+                <a href="/user/edit/{{ user.id }}"  class="btn btn-sm btn-success mr-2">Editar</a>
+                <form action="/user/delete/{{ user.id }}" method="post">
                     <input type="hidden" name="_METHOD" value="DELETE" readonly>
                     <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
                 </form>

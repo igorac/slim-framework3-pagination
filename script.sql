@@ -1,15 +1,26 @@
 CREATE TABLE posts
 (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
     title VARCHAR(50),
-    description TEXT
+    description TEXT,
+    CONSTRAINT FK_USER_POST FOREIGN KEY(user_id)
+    REFERENCES users (id)
 );
 
-INSERT INTO posts (title, description)
-VALUES ('Post 1', 'Description 1');
+INSERT INTO posts (title, user_id ,description)
+VALUES ('Post 1', 1, 'Description 1');
 
-INSERT INTO posts (title, description)
-VALUES ('Post 2', 'Description 2');
+INSERT INTO posts (title, user_id, description)
+VALUES ('Post 2', 2, 'Description 2');
+
+
+INSERT INTO posts (title, user_id, description)
+VALUES ('Post 3', 13, 'Description 3');
+
+
+INSERT INTO posts (title, user_id, description)
+VALUES ('Post 4', 14, 'Description 4');
 
 
 CREATE TABLE users

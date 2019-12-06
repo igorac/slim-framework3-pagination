@@ -19,3 +19,7 @@
     font-weight: bold;
     pointer-events: none;
 }
+
+li.active {
+    pointer-events: none;
+}

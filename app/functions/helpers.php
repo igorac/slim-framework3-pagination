@@ -14,17 +14,17 @@ function path()
     return dirname(dirname(__DIR__));
 }
 
-function flash($index, $message)
+function flash(string $index, string $message)
 {
     Flash::add($index, $message);
 }
 
-function error($message)
+function error(string $message)
 {
     return "<span class='error'>* {$message} </span>";
 }
 
-function success($message)
+function success(string $message)
 {
     return "<span class='success'>{$message} </span>";
 }
@@ -41,7 +41,12 @@ function back()
     die();
 }
 
-function assets($target)
+function assets(string $target)
 {
     return "/assets/$target";  
+}
+
+function buscaSanitize()
+{
+    return filter_input(INPUT_GET, 's', FILTER_SANITIZE_STRING);
 }

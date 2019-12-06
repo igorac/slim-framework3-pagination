@@ -4,9 +4,6 @@ namespace App\traits;
 
 trait Update
 {
-
-    private $sql;
-
     public function update(array $attributes)
     {
         if (!isset($this->field) || !isset($this->value)) {
